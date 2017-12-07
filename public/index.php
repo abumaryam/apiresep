@@ -28,6 +28,7 @@ $app->get('/hello/{name}', function (Request $request, Response $response) {
 
 
 require '../src/routes/kategori.php';
+require '../src/routes/resep.php';
 
 $app->run();
 

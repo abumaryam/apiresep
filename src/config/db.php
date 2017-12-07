@@ -7,7 +7,7 @@ class db {
 	
 	private $dbhost = 'localhost';
 	private $dbuser = 'root';
-	private $dbpass = 'yourpassword';
+	private $dbpass = 'adadehle!!!';
 	private $dbname = 'api';
 
 	public function connect()
