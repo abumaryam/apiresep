@@ -2,7 +2,7 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-
+//semua kategori
 $app->get('/api/kategori',function(Request $request, Response $response){
 
 	$sql = "SELECT * FROM kategori";
