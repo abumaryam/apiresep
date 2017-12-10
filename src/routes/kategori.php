@@ -28,9 +28,9 @@ $app->get('/api/kategori/{id}', function ($request) {
         $db = new db();
 		$db = $db->connect();
 		$stmt = $db->query($sql);
-        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
         $db = null;
-        echo json_encode($students);
+        echo json_encode($result);
     } catch (PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
