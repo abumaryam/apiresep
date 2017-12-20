@@ -4,6 +4,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require '../vendor/autoload.php';
 require '../src/config/db.php';
+require '../src/config/auth.php';
 
 $app = new \Slim\App;
 

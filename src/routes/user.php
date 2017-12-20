@@ -26,6 +26,7 @@ $app->post('/api/user/add', function ($request) {
     $password = $request->getParam('password');
     $name = $request->getParam('name');
     $email = $request->getParam('email');
+    $authentication = new auth();
    
     $sql = "INSERT INTO users (username,password,name,email) VALUES (:username,:password,:name,:email)";
     try {
@@ -38,8 +39,26 @@ $app->post('/api/user/add', function ($request) {
         $stmt->bindParam("name", $name);
         $stmt->bindParam("email", $email);
         $stmt->execute();
-      
         $db = null;
+
+        // membuat nilai return
+
+        try {
+            $db = new db();
+            $db = $db->connect();
+            $sql = "SELECT user_id, name, email, username FROM users WHERE username=:username";
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam("username", $username);
+            $stmt->execute();
+            $usernameDetails = $stmt->fetch(PDO::FETCH_OBJ);
+            $usernameDetails->token = $authentication->apiToken($usernameDetails->user_id);
+            $db = null;
+            $userData = json_encode($usernameDetails);
+            echo '{"userData": ' .$userData . '}';
+            
+        } catch(PDOException $e) {
+            echo '{"error":{"text":'. $e->getMessage() .'}}';
+        }
     } catch (PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
